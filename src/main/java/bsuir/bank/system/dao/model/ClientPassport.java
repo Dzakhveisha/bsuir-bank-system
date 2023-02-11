@@ -1,4 +1,4 @@
-package bsuir.bank.system.model;
+package bsuir.bank.system.dao.model;
 
 import java.time.LocalDate;
 
@@ -42,11 +42,14 @@ public class ClientPassport {
     @Column(name = "passport_identification_number")
     private String idNumber;
 
+    @Column(name = "passport_place_of_birth")
+    private String birthPlace;
+
     @ManyToOne
-    @JoinColumn(name = "passport_place_of_birth")
-    private Address birthPlace;
+    @JoinColumn(name = "passport_city_of_birth_id")
+    private City cityOfBirth;
 
     @ManyToOne
     @JoinColumn(name = "passport_city_of_registration_id")
-    private City regestrationCity;
+    private City registrationCity;
 }

@@ -1,4 +1,4 @@
-package bsuir.bank.system.model;
+package bsuir.bank.system.dao.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,16 +11,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "marital_status")
+@Table(name = "address_city")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MaritalStatus {
+public class City {
+
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
-    @Column(name = "marital_status_id")
+    @Column(name = "city_id")
     private Long id;
 
-    @Column(name = "marital_status")
-    private String status;
+    @Column(name = "city")
+    private String cityName;
+
+    @Column(name = "district")
+    private String district;
+
+    @Column(name = "region")
+    private String region;
 }

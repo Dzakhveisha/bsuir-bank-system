@@ -1,4 +1,4 @@
-package bsuir.bank.system.model;
+package bsuir.bank.system.dao.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

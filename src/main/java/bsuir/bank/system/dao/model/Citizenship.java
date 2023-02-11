@@ -1,4 +1,4 @@
-package bsuir.bank.system.model;
+package bsuir.bank.system.dao.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,7 +23,4 @@ public class Citizenship {
 
     @Column(name = "citizenship_country")
     private String country;
-
-    @Column(name = "client_id")
-    private int clientId;
 }
