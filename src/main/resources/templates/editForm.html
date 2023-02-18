@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Edit Client</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form class="mx-auto" action="#" th:action="@{/editClient/{id}(id=${newClientRequest.id})}" th:object="${newClientRequest}" method="post">
+                 <h3 class="mt-5 text-center" style="background-color: #9bceaa"> Основная Информация </h3>
+                    <div class="my-3">
+                        <label for="lastName" class="form-label">Фамилия</label>
+                        <input type="text" class="form-control" th:field="*{lastName}" id="lastName" required>
+                        <p style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">Имя</label>
+                        <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+                        <p style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="middleName" class="form-label">Отчество</label>
+                        <input type="text" class="form-control" id="middleName" th:field="*{middleName}"  required>
+                        <p style="color: red" th:if="${#fields.hasErrors('middleName')}" th:errorclass="error" th:errors="*{middleName}" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="birthDate" class="form-label">Дата рождения</label>
+                        <input type="date" class="form-control" id="birthDate" th:value="${newClientRequest.birthDate}" th:field="*{birthDate}" required>
+                        <p style="color: red" th:if="${#fields.hasErrors('birthDate')}" th:errorclass="error" th:errors="*{birthDate}" />
+                    </div>
+                    <div class="mt-3 form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioWoman" checked
+                               th:field="*{gender}" th:value="0">
+                        <label class="form-check-label" for="flexRadioWoman">
+                            Женщина
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioMan" checked
+                               th:field="*{gender}" th:value="1">
+                        <label class="form-check-label" for="flexRadioMan">
+                            Мужчина
+                        </label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioOther" checked
+                               th:field="*{gender}" th:value="2">
+                        <label class="form-check-label" for="flexRadioOther">
+                            Другой пол
+                        </label>
+                    </div>
+                    <p style="color: red" th:if="${#fields.hasErrors('gender')}" th:errorclass="error" th:errors="*{gender}" />
+
+                    <div class="mb-3">
+                        <label for="factAdress" class="form-label">Город фактического проживания</label>
+                        <select class="form-select" id="factAdress" th:field="*{factCityId}">
+                            <option th:each="city:${cities}"
+                                    th:value="${city.id}"
+                                    th:text="${city.cityName}"
+                            >
+                            </option>
+                        </select>
+                        <p style="color: red" th:if="${#fields.hasErrors('factCityId')}" th:errorclass="error" th:errors="*{factCityId}" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="factCity" class="form-label">Адрес фактического проживания</label>
+                        <input type="text" class="form-control" id="factCity" th:field="*{factAddress}" required>
+                        <p style="color: red" th:if="${#fields.hasErrors('factAddress')}" th:errorclass="error" th:errors="*{factAddress}" />
+
+                    </div>
+
+
+                    <h3 class="text-center mt-5" style="background-color: #9bceaa"> Паспортные данные </h3>
+                    <div class="my-3">
+                        <label for="pspSeries" class="form-label">Серия паспорта</label>
+                        <input type="text" class="form-control" id="pspSeries" th:field="*{pspSeries}" required>
+                        <p style="color: red" th:if="${#fields.hasErrors('pspSeries')}" th:errorclass="error" th:errors="*{pspSeries}" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="pspNumber" class="form-label">Номер паспорта</label>
+                        <input type="text" class="form-control" id="pspNumber" th:field="*{pspNumber}" required>
+                        <p style="color: red" th:if="${#fields.hasErrors('pspNumber')}" th:errorclass="error" th:errors="*{pspNumber}" />
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="pspIssuedBy" class="form-label">Кем выдан</label>
+                        <input type="text" class="form-control" id="pspIssuedBy" th:field="*{pspIssuedBy}" required>
+                        <p style="color: red" th:if="${#fields.hasErrors('pspIssuedBy')}" th:errorclass="error" th:errors="*{pspIssuedBy}" />
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="pspIssueDate" class="form-label">Дата выдачи</label>
+                        <input type="date" class="form-control" id="pspIssueDate" th:value="${newClientRequest.pspIssuedDate}" th:field="*{pspIssuedDate}" required>
+                        <p style="color: red" th:if="${#fields.hasErrors('pspIssuedDate')}" th:errorclass="error" th:errors="*{pspIssuedDate}" />
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="pspId" class="form-label">Идентификационный номер</label>
+                        <input type="text" class="form-control" id="pspId" th:field="*{pspIdNumber}" required>
+                        <p style="color: red" th:if="${#fields.hasErrors('pspIdNumber')}" th:errorclass="error" th:errors="*{pspIdNumber}" />
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="pspPlaceOfBirth" class="form-label">Место рождения</label>
+                        <input type="text" class="form-control" id="pspPlaceOfBirth" th:field="*{birthPlace}" required>
+                        <p style="color: red" th:if="${#fields.hasErrors('birthPlace')}" th:errorclass="error" th:errors="*{birthPlace}" />
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="pspRegCity" class="form-label">Город Прописки</label>
+                        <select class="form-select" id="pspRegCity" th:field="*{registrationCityId}">
+                            <option th:each="city:${cities}"
+                                    th:value="${city.id}"
+                                    th:text="${city.cityName}">
+                            </option>
+                        </select>
+                        <p style="color: red" th:if="${#fields.hasErrors('registrationCityId')}" th:errorclass="error" th:errors="*{registrationCityId}" />
+                    </div>
+
+                    <h3 class="text-center mt-5" style="background-color: #9bceaa"> Контакты для связи </h3>
+                    <div class="my-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}">
+                        <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="homePhone" class="form-label">Домашний телефон</label>
+                        <input type="text" class="form-control" id="homePhone" th:field="*{homeNumber}">
+                        <p style="color: red" th:if="${#fields.hasErrors('homeNumber')}" th:errorclass="error" th:errors="*{homeNumber}" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mobilePhone" class="form-label">Мобильный телефон</label>
+                        <input type="text" class="form-control" id="mobilePhone" th:field="*{mobilePhone}">
+                        <p style="color: red" th:if="${#fields.hasErrors('mobilePhone')}" th:errorclass="error" th:errors="*{mobilePhone}" />
+                    </div>
+
+                    <h3 class="text-center mt-5" style="background-color: #9bceaa"> Дополнительная информация</h3>
+                    <div class="my-3 form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="pensioner" th:field="*{isPensioner}">
+                        <label class="form-check-label" for="pensioner" >
+                            Пенсионер
+                        </label>
+                        <p style="color: red" th:if="${#fields.hasErrors('isPensioner')}" th:errorclass="error" th:errors="*{isPensioner}" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="marriageStatus" class="form-label">Семейное положение</label>
+                        <select class="form-select" id="marriageStatus" th:field="*{maritalStatusId}">
+                            <option th:each="status:${maritalStatuses}"
+                                    th:value="${status.id}"
+                                    th:text="${status.status}"
+                            >
+                        </select>
+                        <p style="color: red" th:if="${#fields.hasErrors('maritalStatusId')}" th:errorclass="error" th:errors="*{maritalStatusId}" />
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="d" class="form-label">Инвалидность</label>
+                        <select class="form-select" id="d" th:field="*{disabilityId}">
+                            <option th:value="${null}" selected>-</option>
+                            <option th:each="status:${disabilityTypes}"
+                                    th:value="${status.group}"
+                                    th:text="${status.group} + ' группа'"
+                            >
+                        </select>
+                        <p style="color: red" th:if="${#fields.hasErrors('disabilityId')}" th:errorclass="error" th:errors="*{disabilityId}" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="g" class="form-label">Гражданство</label>
+                        <select class="form-select" id="g" th:field="*{citizenshipId}">
+                            <option th:each="citizenship:${citizenships}"
+                                    th:value="${citizenship.id}"
+                                    th:text="${citizenship.country}"
+                            >
+                        </select>
+                        <p style="color: red" th:if="${#fields.hasErrors('citizenshipId')}" th:errorclass="error" th:errors="*{citizenshipId}" />
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="monthlyIncome" class="form-label">Ежемесячный доход</label>
+                        <input type="number" class="form-control" id="monthlyIncome" th:field="*{monthlySalary}">
+                        <p style="color: red" th:if="${#fields.hasErrors('monthlySalary')}" th:errorclass="error" th:errors="*{monthlySalary}" />
+                    </div>
+
+                    <button type="submit" class="mx-auto mb-5 btn btn-success">
+                        Submit
+                    </button>
+                </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+</html>

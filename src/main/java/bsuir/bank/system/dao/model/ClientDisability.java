@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class ClientDisability {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "disability_id")
     private Long id;
 

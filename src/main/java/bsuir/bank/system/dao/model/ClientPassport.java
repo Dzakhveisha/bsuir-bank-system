@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ClientPassport {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "passports_id")
     private Long id;
 

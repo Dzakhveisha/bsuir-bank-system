@@ -1,8 +1,14 @@
 package bsuir.bank.system.dao.model;
 
+import static org.hibernate.annotations.CascadeType.DELETE;
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -30,7 +36,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "client_id")
     private Long id;
 
@@ -49,8 +55,9 @@ public class Client {
     @Column(name = "client_sex")
     private char gender;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "client_passport_id")
+    @Cascade({DELETE, SAVE_UPDATE})
     private ClientPassport passport;
 
     @Column(name = "client_mobile_phone_number")
@@ -83,11 +90,7 @@ public class Client {
     @JoinColumn(name = "client_fact_city_id")
     private City factCity;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "clients_citizenship",
-            joinColumns = { @JoinColumn(name = "client_id") },
-            inverseJoinColumns = { @JoinColumn(name = "citizenship_id") }
-    )
-    private List<Citizenship> citizenship;
+    @ManyToOne
+    @JoinColumn(name = "client_citizenship_id")
+    private Citizenship citizenship;
 }

@@ -7,4 +7,5 @@ import bsuir.bank.system.dao.model.ClientPassport;
 
 @Repository
 public interface PassportRepository extends JpaRepository<ClientPassport, Long> {
+    Boolean existsByIdNumberIgnoreCase(String idNumber);
 }

@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Clients</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 <p class="m-5">
-    <a href="/createForm">Add a new user</a>
+    <a href="/createForm"><i class="bi bi-plus-square"></i> Создать нового клиента</a>
 </p>
 <div class="ms-5" th:switch="${clients}">
-    <h2 th:case="null">No users yet!</h2>
-    <div th:case="*">
-        <h1> Clients </h1>
-        <table>
-            <thead>
+    <h2 th:case="null">Клиентов пока нет!</h2>
+    <div class=" table-responsive " th:case="*">
+        <h2> Клиенты </h2>
+        <table class="table table-sm table-hover">
+            <thead class="table-success ">
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Фамилия Имя Отчество</th>
+                <th>Дата рождения</th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.secondName}"></td>
-                <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
-                <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
+            <tr th:each="client : ${clients}">
+                <td th:text="${client.lastName} +' '+ ${client.firstName} +' '+ ${client.middleName}+' '"></td>
+                <td  th:text="'  ' + ${client.birthDate}+' '"></td>
+                <td><a class="mx-1" th:href="@{/editForm/{id}(id=${client.id})}">Редактировать</a></td>
+                <td><a class="mx-1" th:href="@{/delete/{id}(id=${client.id})}">Удалить</a></td>
             </tr>
             </tbody>
         </table>
